@@ -4,27 +4,37 @@ set nobackup
 set nowritebackup
 set noswapfile
 set noundofile
+set vb t_vb=
+
+call plug#begin('~/.vim/plugged')
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'preservim/nerdtree'
+call plug#end()
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsListSnippets="<c-l>"
 
 set hls
 set is
 set cb=unnamed
-set gfn=Menlo:h16
+set gfn=@Fixedsys:h10
 set ts=4
 set sw=4
 set si
-cd ~/Desktop/CompetitiveProgramming/
 
-nnoremap cpp :-1read ~/Desktop/Template/template.cpp<CR>
+set pythonthreehome=C:\Users\peter\AppData\Local\Programs\Python\Python39-32\
+set pythonthreedll=C:\Users\peter\AppData\Local\Programs\Python\Python39-32\python39.dll
+
+cd C:\Users\peter\Desktop\CompetitiveProgramming
 
 inoremap { {}<Left>
 inoremap {<CR> {<CR>}<Esc>O
 inoremap {{ {
 inoremap {} {}
 
-map <F7> :!javac % <CR>
-map <F8> :!java -cp %:p:h %:t:r <CR>
-
-map <F9> :!g++ -g % -o %:r && ./%:r <CR>
+nmap <C-f> :NERDTreeToggle<CR>
+autocmd filetype cpp nnoremap <F9> :w <bar> !g++ -std=c++14 % -o %:r -Wl,--stack,268435456<CR>
+autocmd filetype cpp nnoremap <F10> :!%:r<CR>
 autocmd filetype cpp nnoremap <C-C> :s/^\(\s*\)/\1\/\/<CR> :s/^\(\s*\)\/\/\/\//\1<CR> $
 
 set nu
@@ -67,4 +77,3 @@ function MyDiff()
     let &shellxquote=l:shxq_sav
   endif
 endfunction
-
